@@ -1,5 +1,7 @@
 # JK BMS RS-485 Analyzer & Diagnostic Tool
 
+![JK BMS RS-485 Analyzer](Screenshot_4.png)
+
 Engineering software for direct communication, protocol analysis, diagnostics and testing of a **single JK BMS** over RS-485.
 
 This project was developed as part of the **Axentum autonomous mobile robot project** during the development and commissioning of its high-power LiFePO4 traction battery system.
@@ -17,52 +19,35 @@ This software was used as an engineering tool before and during development of t
 ## Main Features
 
 - Direct communication with one JK BMS over RS-485
-- COM-port selection
-- Configurable baud rate
-- Raw HEX packet monitoring
-- Timestamped received data
+- COM-port selection and configurable baud rate
+- Raw HEX packet monitoring with timestamps
 - Manual transmission of custom HEX commands
-- Modbus command testing
+- Modbus command and register testing
 - Automatic Modbus CRC16 calculation
-- Quick Modbus register requests
-- Communication diagnostics
-- Packet logging
-- CSV logging
+- Communication diagnostics and BMS response verification
+- Packet and CSV logging
 - Manual engineering notes / event markers
-- Protocol analysis
-- BMS response verification
-- Engineering and commissioning use
+- Protocol analysis and commissioning support
 
 ## Communication Options
 
 ### USB-RS485
 
-Direct PC connection through a USB-to-RS485 adapter.
+Direct PC connection through a USB-to-RS485 adapter:
 
-PC -> USB -> USB-RS485 Adapter -> RS-485 -> JK BMS
+`PC -> USB -> USB-RS485 Adapter -> RS-485 -> JK BMS`
 
 ### Arduino Mega + MAX485 Bridge
 
-The software can also be used with an Arduino Mega and MAX485 communication bridge for hardware-level protocol testing and integration work.
+The software can also be used with an Arduino Mega and MAX485 communication bridge for hardware-level protocol testing and integration work:
 
-PC -> USB Serial -> Arduino Mega -> MAX485 -> RS-485 -> JK BMS
+`PC -> USB Serial -> Arduino Mega -> MAX485 -> RS-485 -> JK BMS`
 
 ## Axentum Project Context
 
 The analyzer was developed for the **Axentum project**, a large autonomous wheeled robot designed for automated handling and deployment of solar panels.
 
-Axentum uses a custom high-power LiFePO4 traction battery architecture. During development, it was necessary to:
-
-- select and configure the JK BMS hardware
-- test RS-485 communication
-- verify BMS responses
-- analyze raw protocol data
-- validate commands
-- debug communication reliability
-- confirm register values
-- prepare the communication architecture for integration into the complete robot
-
-This analyzer was one of the engineering tools used for that work.
+Axentum uses a custom high-power LiFePO4 traction battery architecture. During development, this tool was used to select and configure JK BMS hardware, test RS-485 communication, verify BMS responses, analyze raw protocol data, validate commands, debug communication reliability, confirm register values and prepare the communication architecture for integration into the complete robot.
 
 ## Relationship to the Multi-BMS Monitor
 
@@ -72,62 +57,93 @@ A later application was developed for the actual Axentum traction-battery archit
 
 Single-BMS tool:
 
-JK BMS -> RS-485 -> JK BMS RS-485 Analyzer
+`JK BMS -> RS-485 -> JK BMS RS-485 Analyzer`
 
 Later Axentum multi-BMS system:
 
-JK BMS #1 / #2 / #3 -> RS-485 -> Axentum 3-BMS Battery Monitor
+`JK BMS #1 / #2 / #3 -> RS-485 -> Axentum 3-BMS Battery Monitor`
 
 The two applications therefore serve different purposes:
 
-- **JK BMS RS-485 Analyzer** — low-level testing, protocol analysis, diagnostics and single-BMS communication
-- **Axentum 3-BMS Battery Monitor System** — real-time monitoring and diagnostics of three BMS-controlled battery modules operating together
+- **JK BMS RS-485 Analyzer** — low-level testing, protocol analysis, diagnostics and single-BMS communication.
+- **Axentum 3-BMS Battery Monitor System** — real-time monitoring and diagnostics of three BMS-controlled battery modules operating together.
 
 ## Typical Engineering Workflow
 
 1. Connect one JK BMS through USB-RS485 or the Arduino bridge.
 2. Select the COM port and baud rate.
-3. Establish communication.
-4. Observe incoming raw packets.
-5. Send test commands or Modbus requests.
-6. Verify CRC and response structure.
-7. Record communication logs.
-8. Compare values with expected battery parameters.
-9. Diagnose communication or configuration issues.
-10. Use verified protocol behavior in the higher-level monitoring system.
+3. Establish communication and observe incoming raw packets.
+4. Send test commands or Modbus requests.
+5. Verify CRC, packet structure and returned register values.
+6. Record communication logs and diagnose configuration or communication issues.
+7. Use the verified protocol behavior in the higher-level monitoring system.
 
-## Software Structure
+## Software and Hardware
 
-The project includes Python desktop software and support for hardware communication testing.
+The project includes Python desktop software for serial communication, raw-packet monitoring, Modbus request generation, CRC processing, data logging and engineering diagnostics. It also supports an **Arduino Mega + MAX485 RS-485 bridge** used during hardware-level testing.
 
-Main software functions include serial communication, raw-packet monitoring, Modbus request generation, CRC processing, data logging and engineering diagnostics.
+Primary target family: **JK Smart Active Balance BMS**.
 
-The project also includes support firmware for an **Arduino Mega + MAX485 RS-485 bridge** used during hardware-level testing.
-
-## Hardware
-
-Primary target family: **JK Smart Active Balance BMS**
-
-Typical interfaces used during development:
-
-- RS-485
-- USB-RS485 adapters
-- Arduino Mega
-- MAX485 transceiver
-
-## Why This Tool Was Developed
-
-During development of high-power mobile-robot battery systems, vendor PC software is often insufficient for integration and debugging. This tool was created to provide direct engineering access to the RS-485 channel and make it possible to independently inspect BMS communication, test commands, verify protocol behavior, log data, investigate communication problems and prepare reliable integration with custom robot electronics and software.
-
-## Project Role
-
-The work included BMS communication research, RS-485 protocol testing, communication architecture development, Modbus request testing, raw-packet analysis, diagnostics, software development, hardware bridge testing and integration with the Axentum battery-development workflow.
+Typical interfaces and hardware used during development include RS-485, USB-RS485 adapters, Arduino Mega and MAX485 transceivers.
 
 ## Project Status
 
 This repository documents the first engineering version used for single-BMS diagnostics and protocol analysis. It was later followed by a dedicated **three-BMS monitoring application** for the complete Axentum traction-battery system.
 
-## Developer
+---
+
+# Русское описание
+
+## JK BMS RS-485 Analyzer — анализатор и диагностический инструмент
+
+Это инженерное приложение для прямой связи, анализа протокола, диагностики и тестирования **одной JK BMS** по интерфейсу RS-485.
+
+Программа была разработана в рамках проекта **Axentum** — большого автономного колёсного робота для автоматизированной транспортировки и раскладки солнечных панелей. Она использовалась при разработке и отладке мощной тяговой LiFePO4 аккумуляторной системы робота.
+
+В отличие от более новой версии Battery Monitor System, рассчитанной на одновременную работу с тремя BMS, данная программа подключается **к одной BMS за один сеанс** и предназначена прежде всего для низкоуровневой диагностики и исследования протокола.
+
+## Назначение программы
+
+Программа позволяет инженеру напрямую работать с каналом связи между компьютером и JK Smart Active Balance BMS: анализировать сырые пакеты RS-485, отправлять собственные команды, проверять Modbus-запросы, рассчитывать CRC16, читать ответы BMS, записывать логи и диагностировать проблемы связи и конфигурации.
+
+## Основные возможности
+
+- подключение к одной JK BMS по RS-485;
+- выбор COM-порта и скорости обмена;
+- отображение RAW HEX пакетов с временными метками;
+- ручная отправка HEX-команд;
+- тестирование Modbus-команд и регистров;
+- автоматический расчёт Modbus CRC16;
+- проверка ответов BMS;
+- диагностика RS-485 связи;
+- запись пакетов и CSV-логов;
+- добавление инженерных заметок и событий;
+- анализ протокола во время разработки и пусконаладки.
+
+## Варианты подключения
+
+Программа может работать напрямую через адаптер USB-RS485:
+
+`PC -> USB -> USB-RS485 -> RS-485 -> JK BMS`
+
+Также поддерживается инженерный вариант подключения через Arduino Mega и MAX485:
+
+`PC -> USB Serial -> Arduino Mega -> MAX485 -> RS-485 -> JK BMS`
+
+Этот вариант использовался для аппаратной отладки, исследования протокола и интеграционных испытаний.
+
+## Использование в проекте Axentum
+
+В проекте Axentum программа применялась для настройки JK BMS, проверки RS-485 связи, анализа ответов BMS, исследования сырых данных протокола, тестирования команд и регистров и подготовки дальнейшей интеграции аккумуляторной системы с электроникой мобильного робота.
+
+Позже для финальной архитектуры Axentum была разработана отдельная система мониторинга, способная одновременно получать и анализировать данные **трёх JK BMS**, работающих в составе общей тяговой аккумуляторной системы.
+
+Таким образом:
+
+- **JK BMS RS-485 Analyzer** — инженерная диагностика и анализ одной BMS;
+- **Axentum 3-BMS Battery Monitor System** — мониторинг трёх BMS одновременно в составе общей аккумуляторной системы робота.
+
+## Разработчик
 
 **Oleg Gridin, BEng**  
 CEO / Lead Engineer — GEC Engineering
