@@ -145,7 +145,7 @@ This repository documents the first engineering version used for single-BMS diag
 
 ## Разработчик
 
-**Oleg Gridin, BEng**  
+**Oleg Gridin**  
 CEO / Lead Engineer — GEC Engineering
 
 Website: https://gec-engineering.tech/  
